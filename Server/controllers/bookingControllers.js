@@ -106,19 +106,30 @@ export const getUserBookings=async (req,res)=>{
 }
 
 export const getHotelBookings=async (req,res)=>{
+  console.log("Api hit");
   try {
-    const hotel=await Hotel.findOne({owner:req.auth.userId});
+     const {userId}=req.auth;
+
+     const hotel=await Hotel.findOne({owner:userId});
+  
   if(!hotel){
     return res.json({success:false,message:"No hotel found"});
   }
-  const bookings=(await Booking.find({hotel:hotel._id}).populate("room hotel user")).sort({createdAt:-1});
+  const bookings=await Booking.find({hotel:hotel._id}).sort({createdAt:-1});
+  console.log('bookings',bookings)
 
   const totalBookings=bookings.length;
   const totalRevenue=bookings.reduce((acc,booking)=>acc+booking.totalPrice,0)
+  const dashboardData={
+    totalBookings,
+    totalRevenue,
+    bookings,
+  }
 
-  res.json({success:true,dashboardData:{totalBookings,totalRevenue,bookings}})
+  res.json({success:true,dashboardData})
     
   } catch (error) {
+    console.log("Error in getHotel",error)
     res.json({success:false,message:error.message});
   }
 }
