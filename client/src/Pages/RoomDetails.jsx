@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { assets, facilityIcons, roomCommonData, roomsDummyData } from '../assets/assets';
 import StarRating from '../Components/StarRating';
-import ownerImg from "../assets/OwnerImg.png"
 import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
 
@@ -185,7 +184,7 @@ const RoomDetails = () => {
     {/* Hosted By */}
     <div className='flex flex-col items-start gap-4'>
       <div className='flex gap-4'>
-        <img src={ownerImg} alt='Host' className='h-14 w-14 md:h-18 md:w-18 rounded-full' />
+        <img  alt='Host' className='h-14 w-14 md:h-18 md:w-18 rounded-full' />
         <div>
           <p className='text-lg md:text-xl'>Hosted by {room.hotel.name}</p>
           <div className='flex'>
