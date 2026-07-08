@@ -109,14 +109,13 @@ export const getUserBookings=async (req,res)=>{
 export const getHotelBookings=async (req,res)=>{
   console.log("Api hit");
   try {
-     const {userId}=req.auth;
 
-     const hotel=await Hotel.findOne({owner:userId});
+     const hotel=await Hotel.findOne({owner:req.auth.userId});
   
   if(!hotel){
     return res.json({success:false,message:"No hotel found"});
   }
-  const bookings=await Booking.find({hotel:hotel._id}).sort({createdAt:-1});
+  const bookings=await Booking.find({hotel:hotel._id}).populate("room hotel user").sort({createdAt:-1})
   console.log('bookings',bookings)
 
   const totalBookings=bookings.length;
