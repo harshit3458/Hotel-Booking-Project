@@ -13,7 +13,7 @@ export const stripeWebhooks=async (req,res)=>{
     
   }
 
-  if(event.type==="payment.intent.succeeded"){
+  if(event.type==="payment_intent.succeeded"){
     const paymentIntent=event.data.object;
     const paymentIntentId=paymentIntent.id;
 
