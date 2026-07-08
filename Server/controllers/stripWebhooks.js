@@ -13,15 +13,13 @@ export const stripeWebhooks=async (req,res)=>{
     
   }
 
-  if(event.type==="payment_intent.succeeded"){
-    const paymentIntent=event.date.object;
+  if(event.type==="checkout.session.completed"){
+    const paymentIntent=event.data.object;
     const paymentIntentId=paymentIntent.id;
 
-    const session=await stripeInstance.checkout.sessions.list({
-      payment_intent:paymentIntentId,
-    });
-
-    const {bookingId}=session.data[0].metadata;
+    
+    const session=event.data.object;
+    const {bookingId}=session.metadata;
 
     // mark payment as paid
 
