@@ -5,7 +5,7 @@ import StarRating from './StarRating'
 
 const Testimonials = () => {
   return (
-    <div className='flex flex-col items-center px-6 md:px-16 lg:px-24 bg-slate-50 pt-20 pb-30'>
+    <div id="reviews" className='flex flex-col items-center px-6 md:px-16 lg:px-24 bg-slate-50 pt-20 pb-30'>
       <Title title="Customer Testimonials" subTitle="Heare what our users say about us. We're always looking for ways to improve.
       If you have a positive experience with us. Leave a review."/>
 
